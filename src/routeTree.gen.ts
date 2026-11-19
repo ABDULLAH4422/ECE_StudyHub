@@ -14,6 +14,7 @@ import { Route as AboutRouteImport } from './routes/about'
 import { Route as AchievementsRouteImport } from './routes/achievements'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as AlumniRouteImport } from './routes/alumni'
+import { Route as CalculatorsRouteImport } from './routes/calculators'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as CurriculumRouteImport } from './routes/curriculum'
 import { Route as FacultyRouteImport } from './routes/faculty'
@@ -53,6 +54,11 @@ const AdminRoute = AdminRouteImport.update({
 const AlumniRoute = AlumniRouteImport.update({
   id: '/alumni',
   path: '/alumni',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CalculatorsRoute = CalculatorsRouteImport.update({
+  id: '/calculators',
+  path: '/calculators',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ContactRoute = ContactRouteImport.update({
@@ -137,6 +143,7 @@ export interface FileRoutesByFullPath {
   '/achievements': typeof AchievementsRoute
   '/admin': typeof AdminRouteWithChildren
   '/alumni': typeof AlumniRoute
+  '/calculators': typeof CalculatorsRoute
   '/contact': typeof ContactRoute
   '/curriculum': typeof CurriculumRoute
   '/faculty': typeof FacultyRoute
@@ -159,6 +166,7 @@ export interface FileRoutesByTo {
   '/achievements': typeof AchievementsRoute
   '/admin': typeof AdminRouteWithChildren
   '/alumni': typeof AlumniRoute
+  '/calculators': typeof CalculatorsRoute
   '/contact': typeof ContactRoute
   '/curriculum': typeof CurriculumRoute
   '/faculty': typeof FacultyRoute
@@ -182,6 +190,7 @@ export interface FileRoutesById {
   '/achievements': typeof AchievementsRoute
   '/admin': typeof AdminRouteWithChildren
   '/alumni': typeof AlumniRoute
+  '/calculators': typeof CalculatorsRoute
   '/contact': typeof ContactRoute
   '/curriculum': typeof CurriculumRoute
   '/faculty': typeof FacultyRoute
@@ -206,6 +215,7 @@ export interface FileRouteTypes {
     | '/achievements'
     | '/admin'
     | '/alumni'
+    | '/calculators'
     | '/contact'
     | '/curriculum'
     | '/faculty'
@@ -228,6 +238,7 @@ export interface FileRouteTypes {
     | '/achievements'
     | '/admin'
     | '/alumni'
+    | '/calculators'
     | '/contact'
     | '/curriculum'
     | '/faculty'
@@ -250,6 +261,7 @@ export interface FileRouteTypes {
     | '/achievements'
     | '/admin'
     | '/alumni'
+    | '/calculators'
     | '/contact'
     | '/curriculum'
     | '/faculty'
@@ -273,6 +285,7 @@ export interface RootRouteChildren {
   AchievementsRoute: typeof AchievementsRoute
   AdminRoute: typeof AdminRouteWithChildren
   AlumniRoute: typeof AlumniRoute
+  CalculatorsRoute: typeof CalculatorsRoute
   ContactRoute: typeof ContactRoute
   CurriculumRoute: typeof CurriculumRoute
   FacultyRoute: typeof FacultyRoute
@@ -323,6 +336,13 @@ declare module '@tanstack/react-router' {
       path: '/alumni'
       fullPath: '/alumni'
       preLoaderRoute: typeof AlumniRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/calculators': {
+      id: '/calculators'
+      path: '/calculators'
+      fullPath: '/calculators'
+      preLoaderRoute: typeof CalculatorsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/contact': {
@@ -460,6 +480,7 @@ const rootRouteChildren: RootRouteChildren = {
   AchievementsRoute: AchievementsRoute,
   AdminRoute: AdminRouteWithChildren,
   AlumniRoute: AlumniRoute,
+  CalculatorsRoute: CalculatorsRoute,
   ContactRoute: ContactRoute,
   CurriculumRoute: CurriculumRoute,
   FacultyRoute: FacultyRoute,

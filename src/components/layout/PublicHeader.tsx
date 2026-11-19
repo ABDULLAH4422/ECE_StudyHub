@@ -147,6 +147,11 @@ export function PublicHeader() {
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>
+                  <Link to="/calculators" className="text-xs w-full py-1.5">
+                    Academic Calculators
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
                   <Link to="/labs" className="text-xs w-full py-1.5">
                     Laboratories & Facilities
                   </Link>
@@ -353,6 +358,13 @@ export function PublicHeader() {
                   className="px-3 py-2 text-xs font-medium text-foreground hover:bg-muted rounded-md"
                 >
                   Study Notes
+                </Link>
+                <Link
+                  to="/calculators"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="px-3 py-2 text-xs font-medium text-foreground hover:bg-muted rounded-md"
+                >
+                  Calculators
                 </Link>
                 <Link
                   to="/labs"

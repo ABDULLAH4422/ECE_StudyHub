@@ -79,6 +79,11 @@ export function PublicFooter() {
                 </Link>
               </li>
               <li>
+                <Link to="/calculators" className="text-muted-foreground hover:text-foreground">
+                  Calculators
+                </Link>
+              </li>
+              <li>
                 <Link to="/labs" className="text-muted-foreground hover:text-foreground">
                   Laboratories
                 </Link>
