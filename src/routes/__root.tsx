@@ -12,6 +12,7 @@ import { useEffect, type ReactNode } from "react";
 import appCss from "../style.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { RoleProvider } from "../context/RoleContext";
+import { FloatingAiTutor } from "../components/chat/FloatingAiTutor";
 
 function NotFoundComponent() {
   return (
@@ -123,6 +124,8 @@ function RootComponent() {
       <RoleProvider>
         {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
         <Outlet />
+        {/* Floating AI Study Tutor Chatbot */}
+        <FloatingAiTutor />
       </RoleProvider>
     </QueryClientProvider>
   );
