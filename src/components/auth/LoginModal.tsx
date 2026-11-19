@@ -22,8 +22,6 @@ import {
   CheckCircle2,
   AlertCircle,
   GraduationCap,
-  BookOpen,
-  Building2,
   RotateCcw,
   KeyRound,
   ShieldCheck,
@@ -470,10 +468,10 @@ export function LoginModal({ open, onOpenChange }: LoginModalProps) {
         <div className="pt-3 border-t border-border/80 space-y-2">
           <div className="text-[11px] font-medium text-muted-foreground uppercase tracking-wider flex items-center justify-between">
             <span>Examiner & Demo Quick Access</span>
-            <Badge variant="outline" className="text-[10px] font-normal">Mock Accounts</Badge>
+            <Badge variant="outline" className="text-[10px] font-normal">Mock Student</Badge>
           </div>
 
-          <div className="grid grid-cols-2 gap-2 text-xs">
+          <div className="grid grid-cols-1 gap-2 text-xs">
             <Button
               type="button"
               variant="outline"
@@ -482,40 +480,7 @@ export function LoginModal({ open, onOpenChange }: LoginModalProps) {
               className="h-8 justify-start text-xs gap-2"
             >
               <GraduationCap className="w-3.5 h-3.5 text-muted-foreground shrink-0" />
-              <span className="truncate">Student Demo</span>
-            </Button>
-
-            <Button
-              type="button"
-              variant="outline"
-              size="sm"
-              onClick={() => handleQuickDemoLogin("faculty.demo@example.com", "FACULTY")}
-              className="h-8 justify-start text-xs gap-2"
-            >
-              <BookOpen className="w-3.5 h-3.5 text-muted-foreground shrink-0" />
-              <span className="truncate">Faculty Demo</span>
-            </Button>
-
-            <Button
-              type="button"
-              variant="outline"
-              size="sm"
-              onClick={() => handleQuickDemoLogin("hod.demo@example.com", "DEPARTMENT_ADMIN")}
-              className="h-8 justify-start text-xs gap-2"
-            >
-              <Building2 className="w-3.5 h-3.5 text-muted-foreground shrink-0" />
-              <span className="truncate">HOD Admin</span>
-            </Button>
-
-            <Button
-              type="button"
-              variant="outline"
-              size="sm"
-              onClick={() => handleQuickDemoLogin("admin.demo@example.com", "SYSTEM_ADMIN")}
-              className="h-8 justify-start text-xs gap-2"
-            >
-              <Lock className="w-3.5 h-3.5 text-muted-foreground shrink-0" />
-              <span className="truncate">System Admin</span>
+              <span className="truncate">Student Demo (Sadia M. Rahman · Roll: 1901001)</span>
             </Button>
           </div>
         </div>

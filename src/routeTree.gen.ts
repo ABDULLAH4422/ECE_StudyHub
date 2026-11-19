@@ -28,6 +28,7 @@ import { Route as AdminNotesRouteImport } from './routes/admin.notes'
 import { Route as NotesIndexRouteImport } from './routes/notes.index'
 import { Route as NotesIdRouteImport } from './routes/notes.$id'
 import { Route as NotesUploadRouteImport } from './routes/notes.upload'
+import { Route as StudentAiTutorRouteImport } from './routes/student.ai-tutor'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -124,6 +125,11 @@ const NotesUploadRoute = NotesUploadRouteImport.update({
   path: '/notes/upload',
   getParentRoute: () => rootRouteImport,
 } as any)
+const StudentAiTutorRoute = StudentAiTutorRouteImport.update({
+  id: '/ai-tutor',
+  path: '/ai-tutor',
+  getParentRoute: () => StudentRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -139,11 +145,12 @@ export interface FileRoutesByFullPath {
   '/labs': typeof LabsRoute
   '/publications': typeof PublicationsRoute
   '/research': typeof ResearchRoute
-  '/student': typeof StudentRoute
+  '/student': typeof StudentRouteWithChildren
   '/vision-mission': typeof VisionMissionRoute
   '/admin/notes': typeof AdminNotesRoute
   '/notes/$id': typeof NotesIdRoute
   '/notes/upload': typeof NotesUploadRoute
+  '/student/ai-tutor': typeof StudentAiTutorRoute
   '/notes/': typeof NotesIndexRoute
 }
 export interface FileRoutesByTo {
@@ -160,11 +167,12 @@ export interface FileRoutesByTo {
   '/labs': typeof LabsRoute
   '/publications': typeof PublicationsRoute
   '/research': typeof ResearchRoute
-  '/student': typeof StudentRoute
+  '/student': typeof StudentRouteWithChildren
   '/vision-mission': typeof VisionMissionRoute
   '/admin/notes': typeof AdminNotesRoute
   '/notes/$id': typeof NotesIdRoute
   '/notes/upload': typeof NotesUploadRoute
+  '/student/ai-tutor': typeof StudentAiTutorRoute
   '/notes': typeof NotesIndexRoute
 }
 export interface FileRoutesById {
@@ -182,11 +190,12 @@ export interface FileRoutesById {
   '/labs': typeof LabsRoute
   '/publications': typeof PublicationsRoute
   '/research': typeof ResearchRoute
-  '/student': typeof StudentRoute
+  '/student': typeof StudentRouteWithChildren
   '/vision-mission': typeof VisionMissionRoute
   '/admin/notes': typeof AdminNotesRoute
   '/notes/$id': typeof NotesIdRoute
   '/notes/upload': typeof NotesUploadRoute
+  '/student/ai-tutor': typeof StudentAiTutorRoute
   '/notes/': typeof NotesIndexRoute
 }
 export interface FileRouteTypes {
@@ -210,6 +219,7 @@ export interface FileRouteTypes {
     | '/admin/notes'
     | '/notes/$id'
     | '/notes/upload'
+    | '/student/ai-tutor'
     | '/notes/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -231,6 +241,7 @@ export interface FileRouteTypes {
     | '/admin/notes'
     | '/notes/$id'
     | '/notes/upload'
+    | '/student/ai-tutor'
     | '/notes'
   id:
     | '__root__'
@@ -252,6 +263,7 @@ export interface FileRouteTypes {
     | '/admin/notes'
     | '/notes/$id'
     | '/notes/upload'
+    | '/student/ai-tutor'
     | '/notes/'
   fileRoutesById: FileRoutesById
 }
@@ -269,7 +281,7 @@ export interface RootRouteChildren {
   LabsRoute: typeof LabsRoute
   PublicationsRoute: typeof PublicationsRoute
   ResearchRoute: typeof ResearchRoute
-  StudentRoute: typeof StudentRoute
+  StudentRoute: typeof StudentRouteWithChildren
   VisionMissionRoute: typeof VisionMissionRoute
   NotesIdRoute: typeof NotesIdRoute
   NotesUploadRoute: typeof NotesUploadRoute
@@ -411,6 +423,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof NotesUploadRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/student/ai-tutor': {
+      id: '/student/ai-tutor'
+      path: '/ai-tutor'
+      fullPath: '/student/ai-tutor'
+      preLoaderRoute: typeof StudentAiTutorRouteImport
+      parentRoute: typeof StudentRoute
+    }
   }
 }
 
@@ -423,6 +442,17 @@ const AdminRouteChildren: AdminRouteChildren = {
 }
 
 const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
+
+interface StudentRouteChildren {
+  StudentAiTutorRoute: typeof StudentAiTutorRoute
+}
+
+const StudentRouteChildren: StudentRouteChildren = {
+  StudentAiTutorRoute: StudentAiTutorRoute,
+}
+
+const StudentRouteWithChildren =
+  StudentRoute._addFileChildren(StudentRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
@@ -438,7 +468,7 @@ const rootRouteChildren: RootRouteChildren = {
   LabsRoute: LabsRoute,
   PublicationsRoute: PublicationsRoute,
   ResearchRoute: ResearchRoute,
-  StudentRoute: StudentRoute,
+  StudentRoute: StudentRouteWithChildren,
   VisionMissionRoute: VisionMissionRoute,
   NotesIdRoute: NotesIdRoute,
   NotesUploadRoute: NotesUploadRoute,

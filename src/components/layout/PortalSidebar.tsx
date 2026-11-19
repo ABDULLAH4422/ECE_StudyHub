@@ -2,33 +2,12 @@ import React from "react";
 import { Link, useLocation } from "@tanstack/react-router";
 import {
   LayoutDashboard,
-  BookOpen,
-  FileText,
-  Upload,
-  ClipboardList,
-  FlaskConical,
-  CheckSquare,
-  BarChart3,
-  Bell,
-  MessageSquare,
-  Star,
-  Calendar,
-  User,
-  Users,
-  Building2,
   GraduationCap,
-  ShieldAlert,
-  Settings,
-  Target,
-  FileSpreadsheet,
-  Award,
-  Layers,
   ChevronRight,
   LogOut,
   X,
 } from "lucide-react";
 import { useRole } from "@/context/RoleContext";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
@@ -38,65 +17,15 @@ interface PortalSidebarProps {
 }
 
 export function PortalSidebar({ mobileOpen = false, onCloseMobile }: PortalSidebarProps) {
-  const { currentUser, activeRole } = useRole();
+  const { currentUser } = useRole();
   const location = useLocation();
 
-  // Navigation Items per Role
-  const studentItems = [
+  // Simplified Student Portal Navigation: Only Dashboard is kept
+  const navItems = [
     { label: "Dashboard", href: "/student", icon: LayoutDashboard },
-    { label: "My Courses", href: "/student/courses", icon: BookOpen },
-    { label: "Materials", href: "/student/materials", icon: FileText },
-    { label: "Assignments", href: "/student/assignments", icon: ClipboardList },
-    { label: "Lab Reports", href: "/student/labs", icon: FlaskConical },
-    { label: "Attendance", href: "/student/attendance", icon: CheckSquare },
-    { label: "Results & Grades", href: "/student/results", icon: BarChart3 },
-    { label: "Academic Calendar", href: "/student/calendar", icon: Calendar },
-    { label: "My Profile", href: "/student/profile", icon: User },
   ];
 
-  const facultyItems = [
-    { label: "Dashboard", href: "/faculty-portal", icon: LayoutDashboard },
-    { label: "Assigned Courses", href: "/faculty-portal/courses", icon: BookOpen },
-    { label: "Course Materials", href: "/faculty-portal/materials", icon: Upload },
-    { label: "Assignments", href: "/faculty-portal/assignments", icon: ClipboardList },
-    { label: "Submissions", href: "/faculty-portal/submissions", icon: FlaskConical },
-    { label: "Attendance Tracker", href: "/faculty-portal/attendance", icon: CheckSquare },
-    { label: "Upload Marks", href: "/faculty-portal/results", icon: BarChart3 },
-    { label: "My Profile", href: "/faculty-portal/profile", icon: User },
-  ];
-
-  const hodItems = [
-    { label: "Dashboard", href: "/hod", icon: LayoutDashboard },
-    { label: "Faculty Directory", href: "/hod/faculty", icon: Users },
-    { label: "Course Directory", href: "/hod/courses", icon: BookOpen },
-    { label: "Teacher Allocation", href: "/hod/allocations", icon: Layers },
-    { label: "Batch Management", href: "/hod/batches", icon: GraduationCap },
-    { label: "OBE Attainment", href: "/hod/obe-reports", icon: FileSpreadsheet },
-    { label: "Department Analytics", href: "/hod/analytics", icon: BarChart3 },
-  ];
-
-  const adminItems = [
-    { label: "System Overview", href: "/admin", icon: LayoutDashboard },
-    { label: "User Management", href: "/admin/users", icon: Users },
-    { label: "Roles & Permissions", href: "/admin/roles", icon: ShieldAlert },
-    { label: "Faculty Database", href: "/admin/faculty", icon: Users },
-    { label: "Activity Audit Logs", href: "/admin/logs", icon: ClipboardList },
-    { label: "System Settings", href: "/admin/settings", icon: Settings },
-  ];
-
-  let navItems = studentItems;
-  let roleTitle = "Student Portal";
-
-  if (activeRole === "FACULTY") {
-    navItems = facultyItems;
-    roleTitle = "Faculty Portal";
-  } else if (activeRole === "DEPARTMENT_ADMIN") {
-    navItems = hodItems;
-    roleTitle = "HOD Management";
-  } else if (activeRole === "SYSTEM_ADMIN") {
-    navItems = adminItems;
-    roleTitle = "System Admin";
-  }
+  const roleTitle = "Student Portal";
 
   const sidebarContent = (
     <div className="flex flex-col h-full bg-card">
@@ -141,7 +70,7 @@ export function PortalSidebar({ mobileOpen = false, onCloseMobile }: PortalSideb
             {currentUser.name}
           </span>
           <span className="text-[11px] text-muted-foreground truncate">
-            {roleTitle}
+            {currentUser.identifier ? `Roll: ${currentUser.identifier}` : roleTitle}
           </span>
         </div>
       </div>

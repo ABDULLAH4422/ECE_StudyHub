@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { PortalLayout } from "@/components/layout/PortalLayout";
+import { useRole } from "@/context/RoleContext";
 import {
   BookOpen,
   CheckSquare,
@@ -23,12 +24,17 @@ export const Route = createFileRoute("/student")({
 });
 
 function StudentDashboard() {
+  const { currentUser } = useRole();
   const pendingAssignments = assignments.filter((a) => a.submissionStatus === "NOT_SUBMITTED");
+
+  const welcomeDescription = currentUser.identifier
+    ? `Welcome back, ${currentUser.name} (Roll: ${currentUser.identifier} · 19 Series · 6th Semester)`
+    : "Welcome back, Sadia M. Rahman (Roll: 1901001 · 19 Series · 6th Semester)";
 
   return (
     <PortalLayout
       title="Student Academic Dashboard"
-      description="Welcome back, Sadia M. Rahman (Roll: 1901001 · 19 Series · 6th Semester)"
+      description={welcomeDescription}
     >
       <div className="space-y-6">
         {/* Top Summary Metrics */}
