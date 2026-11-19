@@ -52,6 +52,19 @@ export async function login(req: Request, res: Response): Promise<void> {
 
     const normalizedEmail = email.toLowerCase().trim();
 
+    // Enforce official RUET university email domain validation (@ruet.ac.bd, @s.ruet.ac.bd, @ece.ruet.ac.bd)
+    const RUET_EMAIL_REGEX = /^[a-zA-Z0-9._%+-]+@([a-zA-Z0-9-]+\.)?ruet\.ac\.bd$/i;
+    const isDemo = normalizedEmail in DEMO_ACCOUNTS || normalizedEmail.endsWith(".demo@example.com");
+    const isRuet = RUET_EMAIL_REGEX.test(normalizedEmail);
+
+    if (!isDemo && !isRuet) {
+      res.status(403).json({
+        success: false,
+        message: "Access restricted: Only official RUET emails (@ruet.ac.bd) are permitted to sign in.",
+      });
+      return;
+    }
+
     // Try database authentication first
     try {
       const user = await prisma.user.findUnique({
