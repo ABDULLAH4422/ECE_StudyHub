@@ -1,11 +1,20 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "@tanstack/react-router";
 import {
   LayoutDashboard,
   GraduationCap,
   ChevronRight,
+  ChevronDown,
   LogOut,
   X,
+  BookOpen,
+  FileText,
+  Calculator,
+  Award,
+  Cpu,
+  Clock,
+  CheckSquare,
+  Building2,
 } from "lucide-react";
 import { useRole } from "@/context/RoleContext";
 import { Button } from "@/components/ui/button";
@@ -20,10 +29,31 @@ export function PortalSidebar({ mobileOpen = false, onCloseMobile }: PortalSideb
   const { currentUser } = useRole();
   const location = useLocation();
 
-  // Simplified Student Portal Navigation: Only Dashboard is kept
-  const navItems = [
-    { label: "Dashboard", href: "/student", icon: LayoutDashboard },
+  const academicItems = [
+    { label: "Undergraduate Curriculum", href: "/curriculum", icon: BookOpen },
+    { label: "Study Notes & Materials", href: "/notes", icon: FileText },
+    { label: "Academic Calculators", href: "/calculators", icon: Calculator },
+    { label: "CGPA Calculator", href: "/cgpa-calculator", icon: Award },
+    { label: "Academic Simulators", href: "/simulators", icon: Cpu },
+    { label: "Focus Room", href: "/focus-room", icon: Clock },
+    { label: "Study Planner", href: "/study-planner", icon: CheckSquare },
+    { label: "Laboratories & Facilities", href: "/labs", icon: Building2 },
   ];
+
+  const isAcademicsActive = academicItems.some((item) =>
+    item.href === "/notes"
+      ? location.pathname.startsWith("/notes")
+      : location.pathname === item.href
+  );
+
+  const [academicsOpen, setAcademicsOpen] = useState(true);
+
+  // Auto-expand Academics menu when an academic route is active
+  useEffect(() => {
+    if (isAcademicsActive) {
+      setAcademicsOpen(true);
+    }
+  }, [isAcademicsActive]);
 
   const roleTitle = "Student Portal";
 
@@ -76,38 +106,111 @@ export function PortalSidebar({ mobileOpen = false, onCloseMobile }: PortalSideb
       </div>
 
       {/* Navigation Links */}
-      <nav className="flex-1 px-3 py-3 space-y-0.5 overflow-y-auto">
+      <nav className="flex-1 px-3 py-3 space-y-1 overflow-y-auto">
         <div className="text-[10px] font-medium text-muted-foreground uppercase px-2 py-1 tracking-wider">
-          Navigation
+          Main Navigation
         </div>
-        {navItems.map((item) => {
-          const Icon = item.icon;
-          const isActive = location.pathname === item.href;
-          return (
-            <Link
-              key={item.href}
-              to={item.href as any}
-              onClick={onCloseMobile}
+
+        {/* Dashboard Link */}
+        <Link
+          to="/student"
+          onClick={onCloseMobile}
+          className={cn(
+            "flex items-center justify-between px-2.5 py-1.5 rounded-md text-xs font-medium transition-colors group",
+            location.pathname === "/student"
+              ? "bg-primary text-primary-foreground shadow-xs font-semibold"
+              : "text-muted-foreground hover:text-foreground hover:bg-muted/70"
+          )}
+        >
+          <div className="flex items-center gap-2.5 truncate">
+            <LayoutDashboard
               className={cn(
-                "flex items-center justify-between px-2.5 py-1.5 rounded-md text-xs font-medium transition-colors group",
-                isActive
-                  ? "bg-primary text-primary-foreground shadow-xs"
-                  : "text-muted-foreground hover:text-foreground hover:bg-muted/70"
+                "w-4 h-4 shrink-0",
+                location.pathname === "/student"
+                  ? "text-primary-foreground"
+                  : "text-muted-foreground group-hover:text-foreground"
               )}
-            >
-              <div className="flex items-center gap-2.5 truncate">
-                <Icon
-                  className={cn(
-                    "w-4 h-4 shrink-0",
-                    isActive ? "text-primary-foreground" : "text-muted-foreground group-hover:text-foreground"
-                  )}
-                />
-                <span className="truncate">{item.label}</span>
-              </div>
-              {isActive && <ChevronRight className="w-3.5 h-3.5 shrink-0 opacity-70" />}
-            </Link>
-          );
-        })}
+            />
+            <span className="truncate">Dashboard</span>
+          </div>
+          {location.pathname === "/student" && (
+            <ChevronRight className="w-3.5 h-3.5 shrink-0 opacity-70" />
+          )}
+        </Link>
+
+        {/* Academics Collapsible Section */}
+        <div className="pt-2">
+          <button
+            type="button"
+            onClick={() => setAcademicsOpen((prev) => !prev)}
+            className={cn(
+              "w-full flex items-center justify-between px-2.5 py-1.5 rounded-md text-xs font-medium transition-colors group",
+              isAcademicsActive && !academicsOpen
+                ? "bg-primary/10 text-primary font-semibold"
+                : "text-muted-foreground hover:text-foreground hover:bg-muted/70"
+            )}
+          >
+            <div className="flex items-center gap-2.5 truncate">
+              <GraduationCap
+                className={cn(
+                  "w-4 h-4 shrink-0",
+                  isAcademicsActive
+                    ? "text-primary"
+                    : "text-muted-foreground group-hover:text-foreground"
+                )}
+              />
+              <span className="truncate">Academics</span>
+            </div>
+            <ChevronDown
+              className={cn(
+                "w-3.5 h-3.5 shrink-0 transition-transform duration-200 opacity-70",
+                !academicsOpen && "-rotate-90"
+              )}
+            />
+          </button>
+
+          {/* Academics Submenu Items */}
+          {academicsOpen && (
+            <div className="pl-3.5 ml-2 border-l border-border/80 space-y-0.5 mt-1">
+              {academicItems.map((item) => {
+                const Icon = item.icon;
+                const isActive =
+                  item.href === "/notes"
+                    ? location.pathname.startsWith("/notes")
+                    : location.pathname === item.href;
+
+                return (
+                  <Link
+                    key={item.href}
+                    to={item.href as any}
+                    onClick={onCloseMobile}
+                    className={cn(
+                      "flex items-center justify-between px-2 py-1.5 rounded-md text-xs font-medium transition-colors group",
+                      isActive
+                        ? "bg-primary text-primary-foreground shadow-xs font-semibold"
+                        : "text-muted-foreground hover:text-foreground hover:bg-muted/70"
+                    )}
+                  >
+                    <div className="flex items-center gap-2 truncate">
+                      <Icon
+                        className={cn(
+                          "w-3.5 h-3.5 shrink-0",
+                          isActive
+                            ? "text-primary-foreground"
+                            : "text-muted-foreground group-hover:text-foreground"
+                        )}
+                      />
+                      <span className="truncate">{item.label}</span>
+                    </div>
+                    {isActive && (
+                      <ChevronRight className="w-3 h-3 shrink-0 opacity-70" />
+                    )}
+                  </Link>
+                );
+              })}
+            </div>
+          )}
+        </div>
       </nav>
 
       {/* Return to Public Site Footer */}

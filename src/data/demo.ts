@@ -1250,7 +1250,7 @@ export const poAttainment: AttainmentRow[] = [
 /* ---------------- Users & logs ---------------- */
 
 export const users: User[] = [
-  { id: "u1", name: "Sadia M. Rahman", email: "student@demo.ece.example", role: "STUDENT", avatarInitials: "SM", emailVerified: true, identifier: "210001", batch: "21 Series", status: "ACTIVE" },
+  { id: "u1", name: "Sadia M. Rahman", email: "student@demo.ece.example", role: "STUDENT", avatarInitials: "SM", emailVerified: true, identifier: "Active", batch: "21 Series", status: "ACTIVE" },
   { id: "u2", name: "Imran Hasan", email: "imran@demo.ece.example", role: "STUDENT", avatarInitials: "IH", emailVerified: true, identifier: "210012", batch: "21 Series", status: "ACTIVE" },
   { id: "u3", name: "Fariya Tabassum", email: "faculty@demo.ece.example", role: "FACULTY", avatarInitials: "FT", emailVerified: true, identifier: "ECE-F-101", designation: "Assistant Professor", status: "ACTIVE" },
   { id: "u4", name: "Nadim Reza", email: "nadim@demo.ece.example", role: "FACULTY", avatarInitials: "NR", emailVerified: true, identifier: "ECE-F-118", designation: "Lecturer", status: "ACTIVE" },

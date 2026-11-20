@@ -64,11 +64,7 @@ export function PublicHeader() {
               Department of Electrical & Computer Engineering
             </span>
           </div>
-          <div className="hidden md:flex items-center gap-4 shrink-0 text-[11px]">
-            <span>BAETE OBE Accredited</span>
-            <span className="text-border">•</span>
-            <span className="text-foreground/80 font-medium">Session 2020-21</span>
-          </div>
+          
         </div>
       </div>
 
