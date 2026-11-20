@@ -15,15 +15,19 @@ import { Route as AchievementsRouteImport } from './routes/achievements'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as AlumniRouteImport } from './routes/alumni'
 import { Route as CalculatorsRouteImport } from './routes/calculators'
+import { Route as CgpaCalculatorRouteImport } from './routes/cgpa-calculator'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as CurriculumRouteImport } from './routes/curriculum'
 import { Route as FacultyRouteImport } from './routes/faculty'
 import { Route as FacultyPortalRouteImport } from './routes/faculty-portal'
+import { Route as FocusRoomRouteImport } from './routes/focus-room'
 import { Route as HodRouteImport } from './routes/hod'
 import { Route as LabsRouteImport } from './routes/labs'
 import { Route as PublicationsRouteImport } from './routes/publications'
 import { Route as ResearchRouteImport } from './routes/research'
+import { Route as SimulatorsRouteImport } from './routes/simulators'
 import { Route as StudentRouteImport } from './routes/student'
+import { Route as StudyPlannerRouteImport } from './routes/study-planner'
 import { Route as VisionMissionRouteImport } from './routes/vision-mission'
 import { Route as AdminNotesRouteImport } from './routes/admin.notes'
 import { Route as NotesIndexRouteImport } from './routes/notes.index'
@@ -61,6 +65,11 @@ const CalculatorsRoute = CalculatorsRouteImport.update({
   path: '/calculators',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CgpaCalculatorRoute = CgpaCalculatorRouteImport.update({
+  id: '/cgpa-calculator',
+  path: '/cgpa-calculator',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ContactRoute = ContactRouteImport.update({
   id: '/contact',
   path: '/contact',
@@ -79,6 +88,11 @@ const FacultyRoute = FacultyRouteImport.update({
 const FacultyPortalRoute = FacultyPortalRouteImport.update({
   id: '/faculty-portal',
   path: '/faculty-portal',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FocusRoomRoute = FocusRoomRouteImport.update({
+  id: '/focus-room',
+  path: '/focus-room',
   getParentRoute: () => rootRouteImport,
 } as any)
 const HodRoute = HodRouteImport.update({
@@ -101,9 +115,19 @@ const ResearchRoute = ResearchRouteImport.update({
   path: '/research',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SimulatorsRoute = SimulatorsRouteImport.update({
+  id: '/simulators',
+  path: '/simulators',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const StudentRoute = StudentRouteImport.update({
   id: '/student',
   path: '/student',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const StudyPlannerRoute = StudyPlannerRouteImport.update({
+  id: '/study-planner',
+  path: '/study-planner',
   getParentRoute: () => rootRouteImport,
 } as any)
 const VisionMissionRoute = VisionMissionRouteImport.update({
@@ -144,15 +168,19 @@ export interface FileRoutesByFullPath {
   '/admin': typeof AdminRouteWithChildren
   '/alumni': typeof AlumniRoute
   '/calculators': typeof CalculatorsRoute
+  '/cgpa-calculator': typeof CgpaCalculatorRoute
   '/contact': typeof ContactRoute
   '/curriculum': typeof CurriculumRoute
   '/faculty': typeof FacultyRoute
   '/faculty-portal': typeof FacultyPortalRoute
+  '/focus-room': typeof FocusRoomRoute
   '/hod': typeof HodRoute
   '/labs': typeof LabsRoute
   '/publications': typeof PublicationsRoute
   '/research': typeof ResearchRoute
+  '/simulators': typeof SimulatorsRoute
   '/student': typeof StudentRouteWithChildren
+  '/study-planner': typeof StudyPlannerRoute
   '/vision-mission': typeof VisionMissionRoute
   '/admin/notes': typeof AdminNotesRoute
   '/notes/$id': typeof NotesIdRoute
@@ -167,15 +195,19 @@ export interface FileRoutesByTo {
   '/admin': typeof AdminRouteWithChildren
   '/alumni': typeof AlumniRoute
   '/calculators': typeof CalculatorsRoute
+  '/cgpa-calculator': typeof CgpaCalculatorRoute
   '/contact': typeof ContactRoute
   '/curriculum': typeof CurriculumRoute
   '/faculty': typeof FacultyRoute
   '/faculty-portal': typeof FacultyPortalRoute
+  '/focus-room': typeof FocusRoomRoute
   '/hod': typeof HodRoute
   '/labs': typeof LabsRoute
   '/publications': typeof PublicationsRoute
   '/research': typeof ResearchRoute
+  '/simulators': typeof SimulatorsRoute
   '/student': typeof StudentRouteWithChildren
+  '/study-planner': typeof StudyPlannerRoute
   '/vision-mission': typeof VisionMissionRoute
   '/admin/notes': typeof AdminNotesRoute
   '/notes/$id': typeof NotesIdRoute
@@ -191,15 +223,19 @@ export interface FileRoutesById {
   '/admin': typeof AdminRouteWithChildren
   '/alumni': typeof AlumniRoute
   '/calculators': typeof CalculatorsRoute
+  '/cgpa-calculator': typeof CgpaCalculatorRoute
   '/contact': typeof ContactRoute
   '/curriculum': typeof CurriculumRoute
   '/faculty': typeof FacultyRoute
   '/faculty-portal': typeof FacultyPortalRoute
+  '/focus-room': typeof FocusRoomRoute
   '/hod': typeof HodRoute
   '/labs': typeof LabsRoute
   '/publications': typeof PublicationsRoute
   '/research': typeof ResearchRoute
+  '/simulators': typeof SimulatorsRoute
   '/student': typeof StudentRouteWithChildren
+  '/study-planner': typeof StudyPlannerRoute
   '/vision-mission': typeof VisionMissionRoute
   '/admin/notes': typeof AdminNotesRoute
   '/notes/$id': typeof NotesIdRoute
@@ -216,15 +252,19 @@ export interface FileRouteTypes {
     | '/admin'
     | '/alumni'
     | '/calculators'
+    | '/cgpa-calculator'
     | '/contact'
     | '/curriculum'
     | '/faculty'
     | '/faculty-portal'
+    | '/focus-room'
     | '/hod'
     | '/labs'
     | '/publications'
     | '/research'
+    | '/simulators'
     | '/student'
+    | '/study-planner'
     | '/vision-mission'
     | '/admin/notes'
     | '/notes/$id'
@@ -239,15 +279,19 @@ export interface FileRouteTypes {
     | '/admin'
     | '/alumni'
     | '/calculators'
+    | '/cgpa-calculator'
     | '/contact'
     | '/curriculum'
     | '/faculty'
     | '/faculty-portal'
+    | '/focus-room'
     | '/hod'
     | '/labs'
     | '/publications'
     | '/research'
+    | '/simulators'
     | '/student'
+    | '/study-planner'
     | '/vision-mission'
     | '/admin/notes'
     | '/notes/$id'
@@ -262,15 +306,19 @@ export interface FileRouteTypes {
     | '/admin'
     | '/alumni'
     | '/calculators'
+    | '/cgpa-calculator'
     | '/contact'
     | '/curriculum'
     | '/faculty'
     | '/faculty-portal'
+    | '/focus-room'
     | '/hod'
     | '/labs'
     | '/publications'
     | '/research'
+    | '/simulators'
     | '/student'
+    | '/study-planner'
     | '/vision-mission'
     | '/admin/notes'
     | '/notes/$id'
@@ -286,15 +334,19 @@ export interface RootRouteChildren {
   AdminRoute: typeof AdminRouteWithChildren
   AlumniRoute: typeof AlumniRoute
   CalculatorsRoute: typeof CalculatorsRoute
+  CgpaCalculatorRoute: typeof CgpaCalculatorRoute
   ContactRoute: typeof ContactRoute
   CurriculumRoute: typeof CurriculumRoute
   FacultyRoute: typeof FacultyRoute
   FacultyPortalRoute: typeof FacultyPortalRoute
+  FocusRoomRoute: typeof FocusRoomRoute
   HodRoute: typeof HodRoute
   LabsRoute: typeof LabsRoute
   PublicationsRoute: typeof PublicationsRoute
   ResearchRoute: typeof ResearchRoute
+  SimulatorsRoute: typeof SimulatorsRoute
   StudentRoute: typeof StudentRouteWithChildren
+  StudyPlannerRoute: typeof StudyPlannerRoute
   VisionMissionRoute: typeof VisionMissionRoute
   NotesIdRoute: typeof NotesIdRoute
   NotesUploadRoute: typeof NotesUploadRoute
@@ -345,6 +397,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CalculatorsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/cgpa-calculator': {
+      id: '/cgpa-calculator'
+      path: '/cgpa-calculator'
+      fullPath: '/cgpa-calculator'
+      preLoaderRoute: typeof CgpaCalculatorRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/contact': {
       id: '/contact'
       path: '/contact'
@@ -371,6 +430,13 @@ declare module '@tanstack/react-router' {
       path: '/faculty-portal'
       fullPath: '/faculty-portal'
       preLoaderRoute: typeof FacultyPortalRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/focus-room': {
+      id: '/focus-room'
+      path: '/focus-room'
+      fullPath: '/focus-room'
+      preLoaderRoute: typeof FocusRoomRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/hod': {
@@ -401,11 +467,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ResearchRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/simulators': {
+      id: '/simulators'
+      path: '/simulators'
+      fullPath: '/simulators'
+      preLoaderRoute: typeof SimulatorsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/student': {
       id: '/student'
       path: '/student'
       fullPath: '/student'
       preLoaderRoute: typeof StudentRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/study-planner': {
+      id: '/study-planner'
+      path: '/study-planner'
+      fullPath: '/study-planner'
+      preLoaderRoute: typeof StudyPlannerRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/vision-mission': {
@@ -481,15 +561,19 @@ const rootRouteChildren: RootRouteChildren = {
   AdminRoute: AdminRouteWithChildren,
   AlumniRoute: AlumniRoute,
   CalculatorsRoute: CalculatorsRoute,
+  CgpaCalculatorRoute: CgpaCalculatorRoute,
   ContactRoute: ContactRoute,
   CurriculumRoute: CurriculumRoute,
   FacultyRoute: FacultyRoute,
   FacultyPortalRoute: FacultyPortalRoute,
+  FocusRoomRoute: FocusRoomRoute,
   HodRoute: HodRoute,
   LabsRoute: LabsRoute,
   PublicationsRoute: PublicationsRoute,
   ResearchRoute: ResearchRoute,
+  SimulatorsRoute: SimulatorsRoute,
   StudentRoute: StudentRouteWithChildren,
+  StudyPlannerRoute: StudyPlannerRoute,
   VisionMissionRoute: VisionMissionRoute,
   NotesIdRoute: NotesIdRoute,
   NotesUploadRoute: NotesUploadRoute,

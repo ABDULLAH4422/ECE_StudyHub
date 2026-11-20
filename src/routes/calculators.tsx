@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { PublicLayout } from "@/components/layout/PublicLayout";
 import { PageHeader } from "@/components/common/PageHeader";
 import { OhmsLawCalculator } from "@/components/calculators/OhmsLawCalculator";
@@ -7,6 +7,7 @@ import { ResistorColorCodeCalculator } from "@/components/calculators/ResistorCo
 import { RCTimeConstantCalculator } from "@/components/calculators/RCTimeConstantCalculator";
 import { NumberSystemConverter } from "@/components/calculators/NumberSystemConverter";
 import { VoltageDividerCalculator } from "@/components/calculators/VoltageDividerCalculator";
+import { CGPACalculator } from "@/components/calculators/CGPACalculator";
 import {
   Zap,
   SlidersHorizontal,
@@ -15,14 +16,31 @@ import {
   GitCommit,
   Calculator,
   BookOpen,
+  GraduationCap,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
+interface CalculatorsSearch {
+  tab?: string | undefined;
+}
+
 export const Route = createFileRoute("/calculators")({
+  validateSearch: (search: Record<string, unknown>): CalculatorsSearch => {
+    const tabVal = search["tab"];
+    return {
+      tab: typeof tabVal === "string" ? tabVal : undefined,
+    };
+  },
   component: CalculatorsPage,
 });
 
-type CalculatorId = "ohms-law" | "resistor-color" | "rc-time" | "number-system" | "voltage-divider";
+type CalculatorId =
+  | "cgpa"
+  | "ohms-law"
+  | "resistor-color"
+  | "rc-time"
+  | "number-system"
+  | "voltage-divider";
 
 interface CalculatorItem {
   id: CalculatorId;
@@ -33,6 +51,13 @@ interface CalculatorItem {
 }
 
 const CALCULATORS: CalculatorItem[] = [
+  {
+    id: "cgpa",
+    name: "CGPA Calculator",
+    shortDesc: "Semester GPA & cumulative credit-weighted CGPA",
+    formula: "CGPA = Σ(GP × Cr)/ΣCr",
+    icon: GraduationCap,
+  },
   {
     id: "ohms-law",
     name: "Ohm's Law Calculator",
@@ -71,20 +96,32 @@ const CALCULATORS: CalculatorItem[] = [
 ];
 
 function CalculatorsPage() {
-  const [activeTab, setActiveTab] = useState<CalculatorId>("ohms-law");
+  const search = Route.useSearch();
+  const [activeTab, setActiveTab] = useState<CalculatorId>(() => {
+    if (search.tab && CALCULATORS.some((c) => c.id === search.tab)) {
+      return search.tab as CalculatorId;
+    }
+    return "cgpa";
+  });
+
+  useEffect(() => {
+    if (search.tab && CALCULATORS.some((c) => c.id === search.tab)) {
+      setActiveTab(search.tab as CalculatorId);
+    }
+  }, [search.tab]);
 
   return (
     <PublicLayout>
       <PageHeader
         category="Engineering Tools & Utilities"
         title="Academic Calculators"
-        description="Interactive engineering computational tools for circuit design, laboratory analysis, and undergraduate sessional coursework."
+        description="Interactive engineering computational tools for circuit design, laboratory analysis, CGPA forecasting, and undergraduate sessional coursework."
         breadcrumbs={[{ label: "Academic Calculators" }]}
       />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8">
         {/* Quick Selection Cards Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-3">
           {CALCULATORS.map((calc) => {
             const Icon = calc.icon;
             const isSelected = activeTab === calc.id;
@@ -111,7 +148,7 @@ function CalculatorsPage() {
                   </div>
                   <span
                     className={cn(
-                      "font-mono text-[10px] px-1.5 py-0.5 rounded",
+                      "font-mono text-[10px] px-1.5 py-0.5 rounded truncate max-w-[110px]",
                       isSelected ? "bg-primary-foreground/15 text-primary-foreground" : "bg-muted text-muted-foreground"
                     )}
                   >
@@ -135,7 +172,8 @@ function CalculatorsPage() {
         </div>
 
         {/* Active Calculator Component View */}
-        <div className="max-w-3xl mx-auto">
+        <div className={cn("mx-auto", activeTab === "cgpa" ? "max-w-5xl" : "max-w-3xl")}>
+          {activeTab === "cgpa" && <CGPACalculator />}
           {activeTab === "ohms-law" && <OhmsLawCalculator />}
           {activeTab === "resistor-color" && <ResistorColorCodeCalculator />}
           {activeTab === "rc-time" && <RCTimeConstantCalculator />}

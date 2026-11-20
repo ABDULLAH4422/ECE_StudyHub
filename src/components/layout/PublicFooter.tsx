@@ -84,6 +84,26 @@ export function PublicFooter() {
                 </Link>
               </li>
               <li>
+                <Link to="/cgpa-calculator" className="text-muted-foreground hover:text-foreground">
+                  CGPA Calculator
+                </Link>
+              </li>
+              <li>
+                <Link to="/simulators" className="text-muted-foreground hover:text-foreground">
+                  Simulators
+                </Link>
+              </li>
+              <li>
+                <Link to="/focus-room" className="text-muted-foreground hover:text-foreground">
+                  Focus Room
+                </Link>
+              </li>
+              <li>
+                <Link to="/study-planner" className="text-muted-foreground hover:text-foreground">
+                  Study Planner
+                </Link>
+              </li>
+              <li>
                 <Link to="/labs" className="text-muted-foreground hover:text-foreground">
                   Laboratories
                 </Link>

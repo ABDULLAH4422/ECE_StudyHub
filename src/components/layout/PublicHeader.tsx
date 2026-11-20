@@ -152,6 +152,26 @@ export function PublicHeader() {
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>
+                  <Link to="/cgpa-calculator" className="text-xs w-full py-1.5">
+                    CGPA Calculator
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link to="/simulators" className="text-xs w-full py-1.5">
+                    Academic Simulators
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link to="/focus-room" className="text-xs w-full py-1.5">
+                    Focus Room
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link to="/study-planner" className="text-xs w-full py-1.5">
+                    Study Planner
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
                   <Link to="/labs" className="text-xs w-full py-1.5">
                     Laboratories & Facilities
                   </Link>
@@ -365,6 +385,34 @@ export function PublicHeader() {
                   className="px-3 py-2 text-xs font-medium text-foreground hover:bg-muted rounded-md"
                 >
                   Calculators
+                </Link>
+                <Link
+                  to="/cgpa-calculator"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="px-3 py-2 text-xs font-medium text-foreground hover:bg-muted rounded-md"
+                >
+                  CGPA Calculator
+                </Link>
+                <Link
+                  to="/simulators"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="px-3 py-2 text-xs font-medium text-foreground hover:bg-muted rounded-md"
+                >
+                  Simulators
+                </Link>
+                <Link
+                  to="/focus-room"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="px-3 py-2 text-xs font-medium text-foreground hover:bg-muted rounded-md"
+                >
+                  Focus Room
+                </Link>
+                <Link
+                  to="/study-planner"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="px-3 py-2 text-xs font-medium text-foreground hover:bg-muted rounded-md"
+                >
+                  Study Planner
                 </Link>
                 <Link
                   to="/labs"
